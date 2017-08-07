@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            html,body{
+                margin: 0;
+                padding: 0;
+                height:100%;
+                overflow:hidden;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="container" style="min-width: 310px;height:100%;margin: 0 auto"></div>
+    </body>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+
+    <!-- 导出模块 -->
+    <!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
+    <script type="text/javascript">
+    /**
+ * Dark theme for Highcharts JS
+ * @author Torstein Honsi
+ */
+
+    // Load the fonts
+    // 改变字体
+
+    Highcharts.createElement('link', {
+        href: 'https://fonts.googleapis.com/css?family=Unica+One',
+        rel: 'stylesheet',
+        type: 'text/css'
+    }, null, document.getElementsByTagName('head')[0]);
+
+    //api http://www.hcharts.cn/api/index.php
+    // http://www.highcharts.com/docs
+    Highcharts.theme = {
+        colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+            "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"
+        ],
+        chart: {
+            backgroundColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 1,
+                    y2: 1
+                },
+                stops: [
+                    [0, '#2a2a2b'],
+                    [1, '#3e3e40']
+                ]
+            },
+            style: {
+                fontFamily: "'Unica One', sans-serif"
+            },
+            plotBorderColor: '#606063'
+        },
+        title: {
+            style: {
+                color: '#E0E0E3',
+                textTransform: 'uppercase',
+                fontSize: '20px'
+            }
+        },
+        subtitle: {
+            style: {
+                color: '#E0E0E3',
+                textTransform: 'uppercase'
+            }
+        },
+        xAxis: {
+            gridLineColor: '#707073',
+            labels: {
+                style: {
+                    color: '#E0E0E3'
+                }
+            },
+            lineColor: '#707073',
+            minorGridLineColor: '#505053',
+            tickColor: '#707073',
+            title: {
+                style: {
+                    color: '#A0A0A3'
+
+                }
+            }
+        },
+        yAxis: {
+            gridLineColor: '#707073',
+            labels: {
+                style: {
+                    color: '#E0E0E3'
+                }
+            },
+            lineColor: '#707073',
+            minorGridLineColor: '#505053',
+            tickColor: '#707073',
+            tickWidth: 1,
+            title: {
+                style: {
+                    color: '#A0A0A3'
+                }
+            }
+        },
+        tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            style: {
+                color: '#F0F0F0'
+            }
+        },
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    color: '#B0B0B3'
+                },
+                marker: {
+                    lineColor: '#333'
+                }
+            },
+            boxplot: {
+                fillColor: '#505053'
+            },
+            candlestick: {
+                lineColor: 'white'
+            },
+            errorbar: {
+                color: 'white'
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: '#E0E0E3'
+            },
+            itemHoverStyle: {
+                color: '#FFF'
+            },
+            itemHiddenStyle: {
+                color: '#606063'
+            }
+        },
+        credits: {
+            style: {
+                color: '#666'
+            }
+        },
+        labels: {
+            style: {
+                color: '#707073'
+            }
+        },
+
+        drilldown: {
+            activeAxisLabelStyle: {
+                color: '#F0F0F3'
+            },
+            activeDataLabelStyle: {
+                color: '#F0F0F3'
+            }
+        },
+
+        navigation: {
+            buttonOptions: {
+                symbolStroke: '#DDDDDD',
+                theme: {
+                    fill: '#505053'
+                }
+            }
+        },
+
+        // scroll charts
+        rangeSelector: {
+            buttonTheme: {
+                fill: '#505053',
+                stroke: '#000000',
+                style: {
+                    color: '#CCC'
+                },
+                states: {
+                    hover: {
+                        fill: '#707073',
+                        stroke: '#000000',
+                        style: {
+                            color: 'white'
+                        }
+                    },
+                    select: {
+                        fill: '#000003',
+                        stroke: '#000000',
+                        style: {
+                            color: 'white'
+                        }
+                    }
+                }
+            },
+            inputBoxBorderColor: '#505053',
+            inputStyle: {
+                backgroundColor: '#333',
+                color: 'silver'
+            },
+            labelStyle: {
+                color: 'silver'
+            }
+        },
+
+        navigator: {
+            handles: {
+                backgroundColor: '#666',
+                borderColor: '#AAA'
+            },
+            outlineColor: '#CCC',
+            maskFill: 'rgba(255,255,255,0.1)',
+            series: {
+                color: '#7798BF',
+                lineColor: '#A6C7ED'
+            },
+            xAxis: {
+                gridLineColor: '#505053'
+            }
+        },
+
+        scrollbar: {
+            barBackgroundColor: '#808083',
+            barBorderColor: '#808083',
+            buttonArrowColor: '#CCC',
+            buttonBackgroundColor: '#606063',
+            buttonBorderColor: '#606063',
+            rifleColor: '#FFF',
+            trackBackgroundColor: '#404043',
+            trackBorderColor: '#404043'
+        },
+
+        // special colors for some of the
+        legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+        background2: '#505053',
+        dataLabelsColor: '#B0B0B3',
+        textColor: '#C0C0C0',
+        contrastTextColor: '#F0F0F3',
+        maskColor: 'rgba(255,255,255,0.3)'
+    };
+
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+        // Data retrieved from http://vikjavev.no/ver/index.php?spenn=2d&sluttid=16.06.2015.
+        //
+
+    function draw() {
+        $('#container').highcharts({
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '通勤时间'
+            },
+            subtitle: {
+                text: 'May 31 and and June 1, 2017 at two locations in Vik i Sogn, Norway'
+            },
+            xAxis: {
+                type: 'datetime',
+                gridLineWidth: 1,
+                labels: {
+                    overflow: 'justify'
+                },
+                // tickInterval: 1
+                // offset: 100
+            },
+            yAxis: {
+                // type: 'datetime',
+                title: {
+                    text: 'Time'
+                },
+                // tickInterval: 24 * 60 * 60 * 1000,
+                gridLineWidth: 1,
+                minorGridLineWidth: 0,
+                alternateGridColor: null,
+                plotBands: [{ // Light air
+                    from: 0.3,
+                    to: 1.5,
+                    color: 'rgba(68, 170, 213, 0.1)',
+                    label: {
+                        text: 'Light air',
+                        style: {
+                            color: '#606060'
+                        }
+                    }
+                }, { // Light breeze
+                    from: 1.5,
+                    to: 3.3,
+                    color: 'rgba(0, 0, 0, 0)',
+                    label: {
+                        text: 'Light breeze',
+                        style: {
+                            color: '#606060'
+                        }
+                    }
+                }, { // Gentle breeze
+                    from: 3.3,
+                    to: 5.5,
+                    color: 'rgba(68, 170, 213, 0.1)',
+                    label: {
+                        text: 'Gentle breeze',
+                        style: {
+                            color: '#606060'
+                        }
+                    }
+                }, { // Moderate breeze
+                    from: 5.5,
+                    to: 8,
+                    color: 'rgba(0, 0, 0, 0)',
+                    label: {
+                        text: 'Moderate breeze',
+                        style: {
+                            color: '#606060'
+                        }
+                    }
+                }, { // Fresh breeze
+                    from: 8,
+                    to: 11,
+                    color: 'rgba(68, 170, 213, 0.1)',
+                    label: {
+                        text: 'Fresh breeze',
+                        style: {
+                            color: '#606060'
+                        }
+                    }
+                }, { // Strong breeze
+                    from: 11,
+                    to: 14,
+                    color: 'rgba(0, 0, 0, 0)',
+                    label: {
+                        text: 'Strong breeze',
+                        style: {
+                            color: '#606060'
+                        }
+                    }
+                }, { // High wind
+                    from: 14,
+                    to: 15,
+                    color: 'rgba(68, 170, 213, 0.1)',
+                    label: {
+                        text: 'High wind',
+                        style: {
+                            color: '#606060'
+                        }
+                    }
+                }]
+            },
+            tooltip: {
+                valueSuffix: ' (yc)'
+            },
+            plotOptions: {
+                spline: {
+                    lineWidth: 4,
+                    states: {
+                        hover: {
+                            lineWidth: 5
+                        }
+                    },
+                    marker: {
+                        enabled: false
+                    },
+                    pointInterval: 3600000 * 24, // one day
+                    pointStart: Date.UTC(2016, 6, 6)
+                }
+            },
+            series: [{
+                name: 'Afternoon',
+                data: yAftPoints
+
+            }, {
+                name: 'Moning',
+                data: yMorPoints
+            }],
+            navigation: {
+                menuItemStyle: {
+                    fontSize: '10px'
+                }
+            }
+        });
+    };
+    </script>
+
+    <script type="text/javascript">
+        // var xmlFile = 'healthdata.xml';
+        // var xmlDoc = '';
+        // xmlDoc=document.implementation.createDocument("","",null);
+        // xmlDoc.async=false;  //同步,防止后面程序处理时遇到文件还没加载完成出现的错误,故同步等XML文件加载完再做后面处理
+        // xmlDoc.load(xmlFile); //加载XML
+        var xPoints = [];
+        var yMorPoints = [];
+        var yAftPoints = [];
+
+        var xmlhttp;
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            // xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function() {
+            // console.log('showData', xmlhttp.readyState, xmlhttp.status);
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var xmlDoc = xmlhttp.responseXML;
+                txt = "";
+                x = xmlDoc.getElementsByTagName("Record");
+                var a = x[0];
+                console.log('index.html>>>409', a.length);
+
+                let lastDataArr = 0;
+
+                for (i = 0; i < x.length; i++) {
+                    var nodeValueMap = x[i].attributes;
+                    if(i === 0){
+                        console.log('index.html>>>417', nodeValueMap);
+                    }
+                    for (var j = 0; j < nodeValueMap.length; j++) {
+                        if(nodeValueMap['type'].value  === 'HKQuantityTypeIdentifierStepCount' && (nodeValueMap[j].name === 'startDate' || nodeValueMap[j].name === 'endDate')) {
+                            var dataArr = nodeValueMap[j].value.split(' ');
+                            var a  = dataArr[1].slice(0, 5);
+                            var b = a.replace(':', '.');
+                            var c = Number(b);
+
+                            var e = {};
+                            e[dataArr[0]] = c;
+
+                            //一天中的最后一个数据
+                            if(dataArr[0] !== lastDataArr[0]) {
+                                // yMorPoints.push(e);
+                                if(c>9) {c=9};
+                                yMorPoints.push(c);
+
+                                if(lastDataArr) {
+                                    var a  = lastDataArr[1].slice(0, 5);
+                                    var b = a.replace(':', '.');
+                                    var c = Number(b);
+                                    var e = {};
+                                    e[lastDataArr[0]] = c;
+
+                                    // yAftPoints.push(e);
+                                    yAftPoints.push(c);
+                                }
+
+                            }
+                            lastDataArr = dataArr;
+                            // console.log('showData', dataArr, '');
+                            // // ["2016-09-01","18:43:10","+0800"]
+                            // if(dataArr[0] !== date) {
+                            //     var a  = dataArr[1].slice(0, 5);
+                            //     var b = a.replace(':', '.');
+                            //     var c = Number(b);
+                            //     yMorPoints.push(c);
+                            // }
+                            // var a  = dataArr[1].slice(0, 5);
+                            // var b = a.replace(':', '.');
+                            // var c = Number(b);
+                            // yMorPoints.push(c);
+
+                            // txt = txt + nodeValueMap[j].name + nodeValueMap[j].value + '>>>>>>>>>';
+                        }
+                    }
+                    txt += '<br />'
+                }
+                console.log('index.html>>>453', yMorPoints);
+                console.log('index.html>>>453', yAftPoints);
+                // document.getElementById("container").innerHTML = txt;
+            }
+
+            draw();
+        }
+
+        xmlhttp.open("GET", "./healthdata.xml", true);
+        xmlhttp.send();
+
+
+        function analyseData(data) {
+
+        }
+
+
+        // var xmlDoc = xmlhttp.responseXML;
+        // txt = "";
+        // x = xmlDoc.getElementsByTagName("Record");
+        // for (i = 0; i < x.length; i++) {
+        //     txt = txt + x[i].childNodes[0].nodeValue + "<br />";
+        // }
+        // document.getElementById("container").innerHTML = txt;
+
+        //JS读取 XML 文件中的 area 节点的方式如下:
+        // var nodeList = xmlDoc.documentElement.getElementsByTagName("area")； // IE
+        // for (var i = 0; i < nodeList.length; i++) {
+        //     //...遍历操作...
+        // }
+
+        // var nodeList = xmlDoc.getElementsByTagName("Record"); // 非IE
+        // console.log('showData', typeof(nodeList), '');
+        // for (var i = 0; i < nodeList.length; i++) {
+        //     //...遍历操作...
+        // }
+    </script>
+
+</html>
